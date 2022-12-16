@@ -1,59 +1,85 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRocket } from '@fortawesome/free-solid-svg-icons';
+import clsx from 'clsx';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import styles from 'styles/Landing.module.scss';
+import Link from 'next/link';
 
-export default function Home() {
+export default function Landing() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Beauty Dash</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+      <main role="main" id="main-content" className="container py-5">
+        <section className="py-5">
+          <div className={clsx('d-flex', styles['dash-landing'])}>
+            <div className={clsx('my-3', styles['dash-landing-rocket'])}>
+              {/* Note: Can't use library w/ FontAwesome https://github.com/FortAwesome/Font-Awesome/issues/19331 */}
+              <FontAwesomeIcon
+                icon={faRocket}
+                className={styles['dash-landing-rocket-icon']}
+              />
+            </div>
+            <h1>Welcome to Beauty Dash by Ulta</h1>
+            <p className="dash-tertiary-text">Here&apos;s how it works.</p>
+            <ol className={clsx('list-group', styles['dash-landing-list'])}>
+              <li className="list-group-item  my-3 px-3">
+                <span className={styles['dash-landing-list-number']}>1</span>
+                <span className={styles['dash-landing-list-content']}>
+                  Join an active Beauty Dash event
+                  <div className="dash-tertiary-text">
+                    The more people join, the more points are available to reach
+                    later rounds.
+                  </div>
+                </span>
+              </li>
+              <li className="list-group-item my-3 px-3">
+                <span className={styles['dash-landing-list-number']}>2</span>
+                <span className={styles['dash-landing-list-content']}>
+                  Pledge for offers and points
+                  <div className="dash-tertiary-text">
+                    Pledging unlocks exclusive offers and adds points towards
+                    unlocking later rounds that reveal more products and bigger
+                    offers.
+                  </div>
+                </span>
+              </li>
+              <li className="list-group-item my-3 px-3">
+                <span className={styles['dash-landing-list-number']}>3</span>
+                <span className={styles['dash-landing-list-content']}>
+                  Connect &amp; share for bonus points
+                  <div className="dash-tertiary-text">
+                    Share your pledges on social to earn bonus points that can
+                    put you ahead of the pack. The more people see your shares,
+                    the more points you get.
+                  </div>
+                </span>
+              </li>
+              <li className="list-group-item my-3 px-3">
+                <span className={styles['dash-landing-list-number']}>4</span>
+                <span className={styles['dash-landing-list-content']}>
+                  Purchase and redeem
+                  <div className=" dash-tertiary-text">
+                    Purchase all your pledged products when the event ends to
+                    capture your unlocked offers before they expire!
+                  </div>
+                </span>
+              </li>
+            </ol>
+            <button
+              className="btn btn-dark btn-block btn-lg m-3 "
+              id="start-dashing-btn"
+            >
+              <Link href="/signin">
+                <FontAwesomeIcon icon={faRocket} /> START DASHING
+              </Link>
+            </button>
+          </div>
+        </section>
       </main>
-
-      <footer className={styles.footer}>
-        <a href="https://next.new" target="_blank" rel="noopener noreferrer">
-          Created with&nbsp;<b>next.new</b>&nbsp;⚡️
-        </a>
-      </footer>
     </div>
   );
 }
