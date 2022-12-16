@@ -5,6 +5,32 @@ import Head from 'next/head';
 
 import Link from 'next/link';
 import styles from '../styles/Landing.module.scss';
+import BootstrapTable from 'react-bootstrap-table-next';
+const products = [{ id: 123, name: 'Testing', price: 12.3 }];
+const columns = [
+  {
+    dataField: 'id',
+    text: 'Product ID',
+    sort: true,
+  },
+  {
+    dataField: 'name',
+    text: 'Product Name',
+    sort: true,
+  },
+  {
+    dataField: 'price',
+    text: 'Product Price',
+    sort: true,
+  },
+];
+
+const defaultSorted = [
+  {
+    dataField: 'name',
+    order: 'desc',
+  },
+];
 export default function Landing() {
   return (
     <div>
@@ -15,6 +41,12 @@ export default function Landing() {
       </Head>
       <main role="main" id="main-content" className="container py-5">
         <section className="py-5">
+          <BootstrapTable
+            keyField="id"
+            data={products}
+            columns={columns}
+            defaultSorted={defaultSorted}
+          />
           {/* <div className={clsx('d-flex', styles['dash-landing'])}>
             <div className={clsx('my-3', styles['dash-landing-rocket'])}>
               {/* Note: Can't use library w/ FontAwesome https://github.com/FortAwesome/Font-Awesome/issues/19331 * /}
