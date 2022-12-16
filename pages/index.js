@@ -15,9 +15,9 @@ export default function Landing() {
       </Head>
       <main role="main" id="main-content" className="container py-5">
         <section className="py-5">
-          <div className={clsx('d-flex', styles['dash-landing'])}>
+          {/* <div className={clsx('d-flex', styles['dash-landing'])}>
             <div className={clsx('my-3', styles['dash-landing-rocket'])}>
-              {/* Note: Can't use library w/ FontAwesome https://github.com/FortAwesome/Font-Awesome/issues/19331 */}
+              {/* Note: Can't use library w/ FontAwesome https://github.com/FortAwesome/Font-Awesome/issues/19331 * /}
               <FontAwesomeIcon
                 icon={faRocket}
                 className={styles['dash-landing-rocket-icon']}
@@ -77,7 +77,7 @@ export default function Landing() {
                 <FontAwesomeIcon icon={faRocket} /> START DASHING
               </Link>
             </button>
-          </div>
+          </div> */}
         </section>
       </main>
     </div>
