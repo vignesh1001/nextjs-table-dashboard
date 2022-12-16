@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 import Head from 'next/head';
-import styles from 'styles/Landing.module.scss';
-import Link from 'next/link';
 
+import Link from 'next/link';
+import styles from '../styles/Landing.module.scss';
 export default function Landing() {
   return (
     <div>
