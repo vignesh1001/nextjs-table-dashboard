@@ -6,7 +6,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Landing.module.scss';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 const products = [
   {
     discountName: '10% discount',
@@ -118,6 +120,7 @@ export default function Landing() {
             data={products}
             columns={columns}
             defaultSorted={defaultSorted}
+            pagination={paginationFactory()}
           />
           {/* <div className={clsx('d-flex', styles['dash-landing'])}>
             <div className={clsx('my-3', styles['dash-landing-rocket'])}>
