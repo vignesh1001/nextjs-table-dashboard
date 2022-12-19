@@ -5,8 +5,16 @@ import Head from 'next/head';
 
 import Link from 'next/link';
 import styles from '../styles/Landing.module.scss';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
-const products = [{ id: 123, name: 'Testing', price: 12.3 }];
+const products = [
+  { id: 1, name: 'p2', price: 12.3 },
+  { id: 2, name: 'p3', price: 12.3 },
+  { id: 3, name: 'p2 testing', price: 12.3 },
+  { id: 6, name: 'p8', price: 12.3 },
+  { id: 8, name: 'p10', price: 12.3 },
+  { id: 12, name: 'testing', price: 12.3 },
+];
 const columns = [
   {
     dataField: 'id',
@@ -38,6 +46,12 @@ export default function Landing() {
         <title>Beauty Dash</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+          crossorigin="anonymous"
+        /> */}
       </Head>
       <main role="main" id="main-content" className="container py-5">
         <section className="py-5">
