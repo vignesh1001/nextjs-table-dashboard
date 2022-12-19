@@ -8,30 +8,78 @@ import styles from '../styles/Landing.module.scss';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 const products = [
-  { id: 1, name: 'p2', price: 12.3 },
-  { id: 2, name: 'p3', price: 12.3 },
-  { id: 3, name: 'p2 testing', price: 12.3 },
-  { id: 6, name: 'p8', price: 12.3 },
-  { id: 8, name: 'p10', price: 12.3 },
-  { id: 12, name: 'testing', price: 12.3 },
-];
-const columns = [
   {
-    dataField: 'id',
-    text: 'Product ID',
-    sort: true,
-  },
-  {
-    dataField: 'name',
-    text: 'Product Name',
-    sort: true,
-  },
-  {
-    dataField: 'price',
-    text: 'Product Price',
-    sort: true,
+    discountName: '10% discount',
+    discountKey: 'cartdiscount001',
+    active: 'A',
+    amount: '10%',
+    type: 'Relative',
+    validFrom: '--',
+    validUntil: '--',
+    dateCreated: '04/25/2022 7:11AM',
+    dateModified: '04/26/2022 7:11AM',
   },
 ];
+const headerBackgroundColor = '#364b50';
+const headerFontColor = '#FFF';
+let columns = [
+  {
+    dataField: 'discountName',
+    text: 'Discount Name',
+    sort: true,
+  },
+  {
+    dataField: 'discountKey',
+    text: 'Discount Key',
+    sort: true,
+  },
+  {
+    dataField: 'active',
+    text: 'Active',
+    sort: true,
+  },
+  {
+    dataField: 'amount',
+    text: 'Amount',
+    sort: true,
+  },
+  {
+    dataField: 'type',
+    text: 'Type',
+    sort: true,
+  },
+  {
+    dataField: 'validFrom',
+    text: 'Valid From',
+    sort: true,
+  },
+  {
+    dataField: 'validUntil',
+    text: 'Valid Until',
+    sort: true,
+    headerStyle: {
+      backgroundColor: headerBackgroundColor,
+      color: headerFontColor,
+    },
+  },
+  {
+    dataField: 'dateCreated',
+    text: 'Date Created',
+    sort: true,
+  },
+  {
+    dataField: 'dateModified',
+    text: 'Date Modified',
+    sort: true,
+  },
+];
+columns = columns.map((col) => ({
+  ...col,
+  headerStyle: {
+    backgroundColor: headerBackgroundColor,
+    color: headerFontColor,
+  },
+}));
 
 const defaultSorted = [
   {
@@ -57,6 +105,16 @@ export default function Landing() {
         <section className="py-5">
           <BootstrapTable
             keyField="id"
+            selectRow={{
+              mode: 'checkbox',
+              clickToSelect: true,
+              style: { background: 'red' },
+              headerColumnStyle: {
+                backgroundColor: headerBackgroundColor,
+                color: headerFontColor,
+              },
+              bgColor: 'red',
+            }}
             data={products}
             columns={columns}
             defaultSorted={defaultSorted}
