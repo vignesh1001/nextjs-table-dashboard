@@ -1,3 +1,71 @@
 .dash-landing {
-  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dash-landing-rocket {
+  align-items: center;
+  background: var(--dash-gradient);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  height: 72px;
+  width: 72px;
+}
+
+.dash-landing-search-icon {
+  color: black;
+  font-size: 16px;
+}
+.dash-landing-active-icon {
+  color: #26cf8e;
+  font-size: 16px;
+}
+.dash-filter-fieldslist {
+  font-size: 1rem;
+  width: 175px;
+  height: 100%;
+}
+.dash-filter-btn {
+  border-color: #ced4da;
+}
+
+.dash-landing-list {
+  list-style: decimal outside;
+}
+
+.dash-landing-list li {
+  align-items: flex-start;
+  border: none;
+  color: var(--primary-text);
+  display: flex;
+  font-weight: 700;
+  width: 100%;
+}
+
+.dash-landing-list-number {
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid var(--primary-text);
+  border-radius: 50%;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.dash-landing-list-content {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+  max-width: calc(100% - 40px - 1rem);
+}
+
+.dash-landing-list-content div {
+  color: var(--tertiary-text);
+  font-weight: 400;
 }

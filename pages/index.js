@@ -1,5 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRocket } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleCheck,
+  faCircleMinus,
+  faFilter,
+  faRocket,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 import Head from 'next/head';
 
@@ -11,6 +17,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 const products = [
   {
+    id: 1,
     discountName: '10% discount',
     discountKey: 'cartdiscount001',
     active: 'A',
@@ -26,6 +33,12 @@ const headerBackgroundColor = '#364b50';
 const headerFontColor = '#FFF';
 let columns = [
   {
+    dataField: 'id',
+    text: 'Discount Name',
+    sort: true,
+    hidden: true,
+  },
+  {
     dataField: 'discountName',
     text: 'Discount Name',
     sort: true,
@@ -38,17 +51,27 @@ let columns = [
   {
     dataField: 'active',
     text: 'Active',
-    sort: true,
+    sort: false,
+    align: 'center',
+    headerAlign: 'center',
+    formatter: (cell, row) => {
+      return (
+        <FontAwesomeIcon
+          icon={row.active === 'A' ? faCircleCheck : faCircleMinus}
+          className={styles['dash-landing-active-icon']}
+        />
+      );
+    },
   },
   {
     dataField: 'amount',
     text: 'Amount',
-    sort: true,
+    sort: false,
   },
   {
     dataField: 'type',
     text: 'Type',
-    sort: true,
+    sort: false,
   },
   {
     dataField: 'validFrom',
@@ -89,6 +112,14 @@ const defaultSorted = [
     order: 'desc',
   },
 ];
+const paginationOption = {
+  showTotal: true,
+  paginationTotalRenderer: (from, to, size) => (
+    <span className="react-bootstrap-table-pagination-total">
+      Showing {from} to {to} of {size} Results
+    </span>
+  ),
+};
 export default function Landing() {
   return (
     <div>
@@ -96,15 +127,62 @@ export default function Landing() {
         <title>Beauty Dash</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-          crossorigin="anonymous"
-        /> */}
       </Head>
       <main role="main" id="main-content" className="container py-5">
         <section className="py-5">
+          <div className="row">
+            <div className="col-8 d-flex">
+              <div className="input-group mb-3">
+                <div className="input-group-text p-0 bg-white">
+                  <select
+                    className={clsx(
+                      'form-select form-control border-white ',
+                      styles['dash-filter-fieldslist']
+                    )}
+                    aria-label="Default select example"
+                  >
+                    <option selected value="0">
+                      discount name
+                    </option>
+                    <option value="1">discount key</option>
+                    <option value="2">active</option>
+                    <option value="3">type</option>
+                  </select>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search by discount name(exact match)"
+                  aria-label="Username"
+                />
+                <span className="input-group-text bg-white">
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    className={styles['dash-landing-search-icon']}
+                  />
+                </span>
+              </div>
+            </div>
+            <div className="col-4">
+              <div className="input-group mb-3">
+                <span className="input-group-text bg-white border border-end-0">
+                  <FontAwesomeIcon
+                    icon={faFilter}
+                    className={styles['dash-landing-search-icon']}
+                  />
+                </span>
+                <button
+                  type="button"
+                  className={clsx(
+                    'ps-0 btn btn-info bg-white border border-start-0',
+                    styles['dash-filter-btn']
+                  )}
+                >
+                  Filters
+                </button>
+              </div>
+            </div>
+          </div>
           <BootstrapTable
             keyField="id"
             selectRow={{
@@ -120,71 +198,8 @@ export default function Landing() {
             data={products}
             columns={columns}
             defaultSorted={defaultSorted}
-            pagination={paginationFactory()}
+            pagination={paginationFactory(paginationOption)}
           />
-          {/* <div className={clsx('d-flex', styles['dash-landing'])}>
-            <div className={clsx('my-3', styles['dash-landing-rocket'])}>
-              {/* Note: Can't use library w/ FontAwesome https://github.com/FortAwesome/Font-Awesome/issues/19331 * /}
-              <FontAwesomeIcon
-                icon={faRocket}
-                className={styles['dash-landing-rocket-icon']}
-              />
-            </div>
-            <h1>Welcome to Beauty Dash by Ulta</h1>
-            <p className="dash-tertiary-text">Here&apos;s how it works.</p>
-            <ol className={clsx('list-group', styles['dash-landing-list'])}>
-              <li className="list-group-item  my-3 px-3">
-                <span className={styles['dash-landing-list-number']}>1</span>
-                <span className={styles['dash-landing-list-content']}>
-                  Join an active Beauty Dash event
-                  <div className="dash-tertiary-text">
-                    The more people join, the more points are available to reach
-                    later rounds.
-                  </div>
-                </span>
-              </li>
-              <li className="list-group-item my-3 px-3">
-                <span className={styles['dash-landing-list-number']}>2</span>
-                <span className={styles['dash-landing-list-content']}>
-                  Pledge for offers and points
-                  <div className="dash-tertiary-text">
-                    Pledging unlocks exclusive offers and adds points towards
-                    unlocking later rounds that reveal more products and bigger
-                    offers.
-                  </div>
-                </span>
-              </li>
-              <li className="list-group-item my-3 px-3">
-                <span className={styles['dash-landing-list-number']}>3</span>
-                <span className={styles['dash-landing-list-content']}>
-                  Connect &amp; share for bonus points
-                  <div className="dash-tertiary-text">
-                    Share your pledges on social to earn bonus points that can
-                    put you ahead of the pack. The more people see your shares,
-                    the more points you get.
-                  </div>
-                </span>
-              </li>
-              <li className="list-group-item my-3 px-3">
-                <span className={styles['dash-landing-list-number']}>4</span>
-                <span className={styles['dash-landing-list-content']}>
-                  Purchase and redeem
-                  <div className=" dash-tertiary-text">
-                    Purchase all your pledged products when the event ends to
-                    capture your unlocked offers before they expire!
-                  </div>
-                </span>
-              </li>
-            </ol>
-            <button
-              className="btn btn-dark btn-block btn-lg m-3 "
-              id="start-dashing-btn"
-            >
-              <Link href="/signin">
-                <FontAwesomeIcon icon={faRocket} /> START DASHING
-              </Link>
-            </button>
-          </div> */}
         </section>
       </main>
     </div>
