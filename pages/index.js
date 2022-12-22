@@ -1,10 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faCaretDown,
+  faChevronDown,
+  faChevronUp,
   faCircleCheck,
   faCircleMinus,
   faFilter,
   faRocket,
   faSearch,
+  faSortDown,
+  faSortUp,
+  faTable,
 } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 import Head from 'next/head';
@@ -98,13 +104,36 @@ let columns = [
     sort: true,
   },
 ];
-columns = columns.map((col) => ({
-  ...col,
-  headerStyle: {
-    backgroundColor: headerBackgroundColor,
-    color: headerFontColor,
-  },
-}));
+columns = columns.map((col) => {
+  const sortCaret = (order, column) => (
+    <span style={{ marginLeft: 6 }}>
+      <FontAwesomeIcon
+        style={{ width: 12 }}
+        icon={faChevronUp}
+        className={clsx(
+          !order || order === 'asc' ? 'text-white' : '',
+          styles['dash-landing-search-icon']
+        )}
+      />
+      <FontAwesomeIcon
+        style={{ marginLeft: -12, marginBottom: -8, width: 12 }}
+        icon={faChevronDown}
+        className={clsx(
+          !order || order === 'desc' ? 'text-white' : '',
+          styles['dash-landing-search-icon']
+        )}
+      />
+    </span>
+  );
+  return {
+    ...col,
+    sortCaret: col.sort ? sortCaret : undefined,
+    headerStyle: {
+      backgroundColor: headerBackgroundColor,
+      color: headerFontColor,
+    },
+  };
+});
 
 const defaultSorted = [
   {
@@ -114,11 +143,30 @@ const defaultSorted = [
 ];
 const paginationOption = {
   showTotal: true,
+  // paginationTotalRenderer: (from, to, size) => (
+  //   <span className="react-bootstrap-table-pagination-total">
+  //     Showing {from} to {to} of {size} Results
+  //   </span>
+  // ),
   paginationTotalRenderer: (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+      &nbsp;Items per page ({size} items)
     </span>
   ),
+  sizePerPageList: [
+    {
+      text: '20',
+      value: 20,
+    },
+    {
+      text: '40',
+      value: 40,
+    },
+    {
+      text: 'All',
+      value: products.length,
+    },
+  ],
 };
 export default function Landing() {
   return (
@@ -180,6 +228,55 @@ export default function Landing() {
                 >
                   Filters
                 </button>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6 d-flex">
+              <div className="input-group mb-3">
+                <div className="input-group-text p-0 bg-white">
+                  <select
+                    className={clsx(
+                      'form-select form-control border-white ',
+                      styles['dash-filter-fieldslist']
+                    )}
+                    aria-label="Default select example"
+                  >
+                    <option selected value="0">
+                      Actions
+                    </option>
+                    <option value="1">discount key</option>
+                    <option value="2">active</option>
+                    <option value="3">type</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="col-6 d-flex justify-content-end">
+              <div class="clearfix">
+                <div className="input-group mb-3">
+                  <span className="input-group-text bg-white border border-end-0">
+                    <FontAwesomeIcon
+                      icon={faTable}
+                      className={styles['dash-landing-search-icon']}
+                    />
+                  </span>
+                  <button
+                    type="button"
+                    className={clsx(
+                      'ps-0 btn btn-info bg-white border border-start-0 border-end-0',
+                      styles['dash-filter-btn']
+                    )}
+                  >
+                    Table settings
+                  </button>
+                  <span className="input-group-text bg-white border border-start-0">
+                    <FontAwesomeIcon
+                      icon={faCaretDown}
+                      className={styles['dash-landing-search-icon']}
+                    />
+                  </span>
+                </div>
               </div>
             </div>
           </div>
